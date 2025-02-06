@@ -24,7 +24,7 @@ export default function ListeVoitures() {
        * ✅ setVoitures(data.voitures) → Met à jour l’état voitures avec les données reçues. 
     */
     useEffect(() => {
-        fetch("http://localhost:5000/voitures")
+        fetch("https://api-htb9.vercel.app/voitures")
             .then(response => response.json())
             .then(data => setVoitures(data.voitures))
             .catch(error => console.error("Erreur lors du chargement des voitures :", error));
@@ -38,7 +38,7 @@ export default function ListeVoitures() {
     */
     const handleDelete = (id) => {
         if (window.confirm("Voulez-vous vraiment supprimer cete voiture ? ")) {
-            fetch(`http://localhost:5000/voitures/${id}`, {
+            fetch(`https://api-htb9.vercel.app/voitures/${id}`, {
                 method: "DELETE",
             })
                 .then(() => {
@@ -55,7 +55,7 @@ export default function ListeVoitures() {
         * 🔥 Ajouter une voiture via API
     */
     const handleAjoute = (nouvelleVoiture) => {
-        fetch("http://localhost:5000/voitures", {
+        fetch("https://api-htb9.vercel.app/voitures", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(nouvelleVoiture),
@@ -75,7 +75,7 @@ export default function ListeVoitures() {
         * 🔥 Modifier une voiture via API
     */
     const handleModifier = (voitureModifier) => {
-        fetch(`http://localhost:5000/voitures/${voitureModifier.id}`, {
+        fetch(`https://api-htb9.vercel.app/voitures/${voitureModifier.id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(voitureModifier),

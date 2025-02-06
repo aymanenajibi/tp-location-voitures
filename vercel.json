@@ -2,14 +2,26 @@
   "version": 2,
   "builds": [
     {
-      "src": "./services/index.js",
+      "src": "client/package.json",
+      "use": "@vercel/react"
+    },
+    {
+      "src": "api/voitures.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
+      "src": "/api/(.*)",
+      "dest": "/api/voitures.js"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/images/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "/client/build/$1"
     }
   ]
 }

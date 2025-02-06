@@ -5,6 +5,7 @@ export default function AjouterVoiture({onAjout}) {
     const [nouvelleVoiture, setNouvelleVoiture] = useState({
         id: '',
         Marque: '',
+        TypeVoiture: '',
         TypeCarburant: '',
         PrixLocation: '',
         image: '',
@@ -36,7 +37,7 @@ export default function AjouterVoiture({onAjout}) {
         
         if (nouvelleVoiture.id && nouvelleVoiture.Marque && nouvelleVoiture.PrixLocation) {
             onAjout(nouvelleVoiture); //* 🔥 Envoie à ListeVoitures
-            setNouvelleVoiture({ id: "", Marque: "", TypeCarburant: "", PrixLocation: "", image: "" });
+            setNouvelleVoiture({ id: "", Marque: "",TypeVoiture: "", TypeCarburant: "", PrixLocation: "", image: "" });
         } else {
             alert("Veuillez remplir tous les champs obligatoires !");
         }
@@ -64,6 +65,15 @@ export default function AjouterVoiture({onAjout}) {
                         name="Marque"
                         placeholder="Marque"
                         value={nouvelleVoiture.Marque}
+                        onChange={handleChange} />
+                        <br />
+                <br />
+
+                <input
+                        type="text" 
+                        name="TypeVoiture"
+                        placeholder="Type Voiture"
+                        value={nouvelleVoiture.TypeVoiture}
                         onChange={handleChange} />
                         <br />
                 <br />

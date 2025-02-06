@@ -26,9 +26,13 @@ export default function ListeVoitures() {
     useEffect(() => {
         fetch("https://api-htb9.vercel.app/voitures")
             .then(response => response.json())
-            .then(data => setVoitures(data.voitures))
+            .then(data => {
+                console.log("Données reçues:", data.voitures); // Vérification
+                setVoitures(data.voitures);
+            })
             .catch(error => console.error("Erreur lors du chargement des voitures :", error));
-    }, []); 
+    }, []);
+    
     
 
     /* 
@@ -102,6 +106,7 @@ export default function ListeVoitures() {
                     <tr>
                         <th>#</th>
                         <th>Marque</th>
+                        <th>Type Voiture</th>
                         <th>Type Carburant</th>
                         <th>Discount</th>
                         <th>Prix de location</th>
@@ -110,8 +115,8 @@ export default function ListeVoitures() {
                     </tr>
                 </thead>
                 <tbody>
-                    {voitures.map((voiture) => (
-                        <Voiture voituree={voiture} key={voiture.id} supprimer={handleDelete} modifier={handleModifier} />
+                    {voitures.map((voiture , index) => (
+                        <Voiture voituree={voiture} key={voiture.id || index} supprimer={handleDelete} modifier={handleModifier} />
                     ))}
                 </tbody>
             </table>

@@ -59,7 +59,7 @@ export default function Voiture({ voituree, supprimer, modifier}) {
                         onChange={handleChange}
                     />
                 ) : (
-                        voituree.TypeCarburant
+                    voituree.TypeCarburant
                 )}
             </td>
             <td>

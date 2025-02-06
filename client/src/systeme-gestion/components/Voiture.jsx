@@ -36,6 +36,19 @@ export default function Voiture({ voituree, supprimer, modifier}) {
                         voituree.Marque
                 )}
             </td>
+
+            <td>
+                {isEditing ? (
+                    <input
+                        type="text"
+                        name="TypeVoiture"
+                        value={editedVoiture.TypeVoiture}
+                        onChange={handleChange}
+                    />
+                ) : (
+                    voituree.TypeVoiture
+                )}
+            </td>
             
             <td>
                 {isEditing ? (

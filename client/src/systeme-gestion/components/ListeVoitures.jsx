@@ -137,7 +137,7 @@ export default function ListeVoitures() {
     return (
         <div>
             <AjouterVoiture onAjout={handleAjoute} />
-            <h2>Liste des voitures</h2>
+            <h2 style={{marginLeft: "35px", fontWeight:"bold"}}>Liste des voitures</h2>
 
             {/* Barre de recherche */}
             <input 
@@ -145,19 +145,19 @@ export default function ListeVoitures() {
                     placeholder="Rechercher une voiture (ex: Dacia Logan)" 
                     value={recherche} 
                     onChange={(e) => setRecherche(e.target.value)} 
-                    style={{ padding: "10px", marginBottom: "15px", width: "100%" }} 
+                    style={{ padding: "10px", margin: "15px", width: "100%" }} 
             />
 
 
             
             {/* Ajout de la barre de recherche pour filtrer */}
-            <label>Filtrer par type de voiture</label>
+            <label style={{marginLeft: "250px"}}>Filtrer par type de voiture</label>
             <select value={filtreType} onChange={(e) => setFiltreType(e.target.value)}
-                style={{ padding: "10px", marginBottom: "15px" }} >
+                style={{ padding: "10px", marginLeft: "15px"}} >
                 <option value="">Toutes</option>
-                <option value="Luxe">Luxe</option>
-                <option value="Économique">Économique</option>
-                <option value="SUV">SUV</option>
+                <option value="Luxe">Luxe 1000 - 1500 MAD</option>
+                <option value="Économique">Économique 200 - 500 MAD</option>
+                <option value="SUV">SUV 500 - 1000 MAD</option>
             </select>
             <br />
             <br />

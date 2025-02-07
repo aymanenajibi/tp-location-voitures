@@ -16,7 +16,8 @@ import AjouterVoiture from "./AjouterVoiture";
 
 export default function ListeVoitures() { 
     const [voitures, setVoitures] = useState([]);
-    
+    const [filtreType, setFiltreType] = useState("");//* ✅ Stocke le type de voiture sélectionné
+    const [recherche, setRecherche] = useState("");//* ✅ Stocke la valeur de recherche saisie par l'utilisateur
     
     /* 
        * ✅ fetch("http://localhost:5000/voitures") → Envoie une requête HTTP pour récupérer la liste des voitures.
@@ -41,16 +42,25 @@ export default function ListeVoitures() {
         * 🔥 Supprimer une voiture via API
     */
     const handleDelete = (id) => {
-        if (window.confirm("Voulez-vous vraiment supprimer cete voiture ? ")) {
+        if (window.confirm("Voulez-vous vraiment supprimer cette voiture ?")) {
             fetch(`https://api-htb9.vercel.app/voitures/${id}`, {
                 method: "DELETE",
             })
-                .then(() => {
-                    setVoitures(voitures.filter((voiture) => voiture.id !== id)); //* ✅ Supprime la voiture de la liste
-                })
-                .catch(error => console.error("Erreur lors de la suppression de la voiture :", error));
+            .then(() => {
+                const nouvellesVoitures = voitures.filter((voiture) => voiture.id !== id);
+    
+                //* Réassignation des IDs après suppression
+                const voituresAvecNouveauxIds = nouvellesVoitures.map((voiture, index) => ({
+                    ...voiture,
+                    id: `v${index + 1}`
+                }));
+    
+                setVoitures(voituresAvecNouveauxIds);
+            })
+            .catch(error => console.error("Erreur lors de la suppression de la voiture :", error));
         }
     };
+    
     
 
     /*   
@@ -59,14 +69,19 @@ export default function ListeVoitures() {
         * 🔥 Ajouter une voiture via API
     */
     const handleAjoute = (nouvelleVoiture) => {
+        //! Générer un nouvel ID basé sur le nombre actuel de voitures
+        const nouvelId = `v${voitures.length + 1}`;
+    
+        //! Ajouter l'ID généré à la nouvelle voiture
+        const voitureAvecId = { ...nouvelleVoiture, id: nouvelId };
         fetch("https://api-htb9.vercel.app/voitures", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(nouvelleVoiture),
+            body: JSON.stringify(voitureAvecId),
         })
             .then(response => response.json())
-            .then((date) => {
-                setVoitures([...voitures, date]); //* ✅ Ajoute la nouvelle voiture à la liste
+            .then((data) => {
+                setVoitures([...voitures, data]); //* ✅ Ajoute la nouvelle voiture à la liste
             })
             .catch(error => console.error("Erreur lors de l'ajout de la voiture :", error));
     };
@@ -94,13 +109,61 @@ export default function ListeVoitures() {
         .catch(error => console.error("Erreur lors de la modification de la voiture :", error));
     };
 
+/*
+    //* Fonction de filtrage des voitures par type selectionné 
+    const voituresFiltrees = voitures.filter((voiture) => { 
+        const prix = parseFloat(voiture.PrixLocation);
+        if (filtreType === "luxe") {
+            return prix >= 1000 && prix <= 1500;
+        } else if (filtreType === "economique") {
+            return prix >= 200 && prix <= 500;
+        } else if (filtreType === "suv") {
+            return prix >= 500 && prix <= 1000;
+        }
+        return true; // Afficher toutes les voitures si aucun filtre n'est appliqué
+    }); */
 
+    //* Fonction de filtrage des voitures
+    const voituresFiltrees = voitures.filter((voiture) => {
+        return voiture.Marque.toLowerCase().includes(recherche.toLowerCase()) &&
+            (filtreType
+                ? voiture.TypeVoiture.toLowerCase() === filtreType.toLowerCase()
+                : true
+            );
+    });
+      
 
 
     return (
         <div>
             <AjouterVoiture onAjout={handleAjoute} />
             <h2>Liste des voitures</h2>
+
+            {/* Barre de recherche */}
+            <input 
+                    type="text" 
+                    placeholder="Rechercher une voiture (ex: Dacia Logan)" 
+                    value={recherche} 
+                    onChange={(e) => setRecherche(e.target.value)} 
+                    style={{ padding: "10px", marginBottom: "15px", width: "100%" }} 
+            />
+
+
+            
+            {/* Ajout de la barre de recherche pour filtrer */}
+            <label>Filtrer par type de voiture</label>
+            <select value={filtreType} onChange={(e) => setFiltreType(e.target.value)}
+                style={{ padding: "10px", marginBottom: "15px" }} >
+                <option value="">Toutes</option>
+                <option value="Luxe">Luxe</option>
+                <option value="Économique">Économique</option>
+                <option value="SUV">SUV</option>
+            </select>
+            <br />
+            <br />
+            
+            
+            {/* Tableau des voitures */}
             <table border="1">
                 <thead>
                     <tr>
@@ -115,7 +178,7 @@ export default function ListeVoitures() {
                     </tr>
                 </thead>
                 <tbody>
-                    {voitures.map((voiture , index) => (
+                    {voituresFiltrees.map((voiture , index) => (
                         <Voiture voituree={voiture} key={voiture.id || index} supprimer={handleDelete} modifier={handleModifier} />
                     ))}
                 </tbody>

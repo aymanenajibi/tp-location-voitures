@@ -35,7 +35,7 @@ export default function AjouterVoiture({onAjout}) {
         */
         e.preventDefault();
         
-        if (nouvelleVoiture.id && nouvelleVoiture.Marque && nouvelleVoiture.PrixLocation) {
+        if (nouvelleVoiture.Marque && nouvelleVoiture.PrixLocation) {
             onAjout(nouvelleVoiture); //* 🔥 Envoie à ListeVoitures
             setNouvelleVoiture({ id: "", Marque: "",TypeVoiture: "", TypeCarburant: "", PrixLocation: "", image: "" });
         } else {
@@ -55,8 +55,10 @@ export default function AjouterVoiture({onAjout}) {
                         type="text"
                         name="id"
                         placeholder="ID"
-                        value={nouvelleVoiture.id}
-                        onChange={handleChange} />
+                        value={nouvelleVoiture.id || ""}
+                        onChange={handleChange} 
+                        disabled
+                        />
                         <br />
                 <br />
                 

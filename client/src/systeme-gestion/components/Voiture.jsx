@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 
-export default function Voiture({ voituree, supprimer, modifier}) {
-    
+export default function Voiture({ voituree, supprimer, modifier }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedVoiture, setEditedVoiture] = useState({ ...voituree });
 
@@ -33,7 +32,7 @@ export default function Voiture({ voituree, supprimer, modifier}) {
                         onChange={handleChange}
                     />
                 ) : (
-                        voituree.Marque
+                    voituree.Marque
                 )}
             </td>
 

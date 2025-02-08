@@ -45,10 +45,16 @@ export default function Voiture({ voituree, supprimer, modifier }) {
                         onChange={handleChange}
                     />
                 ) : (
-                    voituree.TypeVoiture
+                        <span style={{
+                            color : voituree.TypeVoiture === "Économique" ? "#2ECC71"
+                                    : voituree.TypeVoiture === "SUV" ? "#3498DB"
+                                        : voituree.TypeVoiture === "Luxe" ? "#E74C3C"
+                                            : "#34495E"
+                        }}>
+                            {voituree.TypeVoiture}
+                        </span>
                 )}
-            </td>
-            
+            </td>     
             <td>
                 {isEditing ? (
                     <input
@@ -106,8 +112,7 @@ export default function Voiture({ voituree, supprimer, modifier }) {
                         <img
                             src={voituree.image}
                             alt={voituree.Marque}
-                            width="100" 
-                            
+                            style={{ borderRadius: '10px', objectFit: 'cover' , width: '150px' }}                            
                         />
                 )}
             </td>
@@ -117,13 +122,13 @@ export default function Voiture({ voituree, supprimer, modifier }) {
                         <>
                             <button
                                 onClick={handleSave}
-                                style={{ background: "green", color: "white" , marginRight: '10px' }}
+                                style={{ background: "green", color: "white" , marginRight: '10px' , padding: '10px'  }}
                             >
                                 Enregistrer
                             </button>
                             <button
                                 onClick={() => setIsEditing(false)}
-                                style={{ background: "gray", color: "white" , marginRight: '10px' }}
+                                style={{ background: "gray", color: "white" , marginRight: '10px' , padding: '10px' }}
                             >
                                 Annuler
                             </button>
@@ -132,13 +137,13 @@ export default function Voiture({ voituree, supprimer, modifier }) {
                         <>
                             <button
                                 onClick={() => setIsEditing(true)}
-                                style={{ background: "green", color: "white" , marginRight: '10px' }}
+                                style={{ background: "green", color: "white" , marginRight: '10px' , padding: '10px' }}
                             >
                                 Modifier
                             </button>
                             <button
                                 onClick={() => supprimer(voituree.id)}
-                                style={{ background: "red", color: "white" , marginRight: '10px' }}
+                                style={{ background: "red", color: "white" , marginRight: '10px' , padding: '10px' }}
                             >
                                 Supprimer
                             </button>

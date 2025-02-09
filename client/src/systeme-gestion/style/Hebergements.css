@@ -1,55 +1,170 @@
+/* Conteneur principal pour les cartes */
 .hebergements-container {
-    text-align: center;
-    padding: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colonnes de largeur égale */
+  gap: 20px; /* Espacement entre les cartes */
+}
+
+/* Barre de recherche */
+.search-bar {
+  grid-column: 1 / -1; /* La barre de recherche occupe toute la largeur */
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Carte d'hébergement */
+.hebergement-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hebergement-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Titre de l'hôtel */
+.hebergement-card h3 {
+  font-size: 20px; /* Taille de police standard */
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Image de l'hôtel */
+.hebergement-card img {
+  width: 100%;
+  height: 150px; /* Hauteur fixe pour les images */
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+/* Description et détails */
+.hebergement-card p {
+  font-size: 14px; /* Taille de police standard */
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.hebergement-card p strong {
+  color: #333;
+}
+
+/* Boutons */
+.hebergement-card button {
+  background-color: #0083b0;
+  color: #fff;
+  border: none;
+  padding: 8px 12px; /* Taille de bouton standard */
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background-color 0.3s ease;
+  font-size: 14px; /* Taille de police standard */
+}
+
+.hebergement-card button:hover {
+  background-color: #000;
+}
+
+/* Formulaire de commentaire */
+.comment-form {
+  margin-top: 15px;
+}
+
+.comment-form input {
+  width: calc(100% - 90px); /* Ajustement de la largeur */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 14px; /* Taille de police standard */
+}
+
+.comment-form button {
+  width: 80px; /* Largeur standard */
+  background-color: #00b4db;
+  font-size: 14px; /* Taille de police standard */
+}
+
+.comment-form button:hover {
+  background-color: #0083b0;
+}
+
+/* Liste des commentaires */
+.hebergement-card ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.hebergement-card ul li {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 14px; /* Taille de police standard */
+  color: #666;
+}
+
+/* Message "Aucun résultat" */
+.no-result {
+  grid-column: 1 / -1; /* Occupe toute la largeur */
+  text-align: center;
+  font-size: 18px;
+  color: #ff0000;
+  margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+  .hebergements-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne sur les écrans moyens */
   }
-  
-  .search-bar {
-    width: 100%;
-    max-width: 400px;
-    padding: 8px;
-    margin: 10px auto;
-    display: block;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .hebergements-container {
+    grid-template-columns: 1fr; /* 1 carte par ligne sur les tablettes et mobiles */
   }
-  
-  .hebergement-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    margin: 10px auto;
-    max-width: 500px;
-    background: #f9f9f9;
-    text-align: center;
+
+  .hebergement-card h3 {
+    font-size: 18px; /* Taille de police réduite pour les petits écrans */
   }
-  
+
   .hebergement-card img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    cursor: pointer;
-    border-radius: 5px;
+    height: 120px; /* Hauteur réduite pour les petits écrans */
   }
-  
-  button {
-    padding: 8px 12px;
-    margin: 5px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+
+  .hebergement-card p {
+    font-size: 12px; /* Taille de police réduite pour les petits écrans */
   }
-  
-  button:hover {
-    background: #ddd;
+
+  .hebergement-card button {
+    padding: 6px 10px; /* Taille de bouton réduite */
+    font-size: 12px; /* Taille de police réduite */
   }
-  
-  .comment-form {
-    margin-top: 10px;
+
+  .comment-form input {
+    font-size: 12px; /* Taille de police réduite */
   }
-  
-  .no-result {
-    color: red;
-    font-weight: bold;
-    text-align: center;
+
+  .comment-form button {
+    font-size: 12px; /* Taille de police réduite */
   }
-  
+
+  .hebergement-card ul li {
+    font-size: 12px; /* Taille de police réduite */
+  }
+}

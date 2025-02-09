@@ -34,13 +34,13 @@ export default function Hebergements() {
       {filteredHotels.length > 0 ? (
         filteredHotels.map((hotel) => (
           <div key={hotel.IdHotel} className="hebergement-card">
+          <h3>{hotel.Nom_Hotel}</h3>
             <img
               // src={`/images/${hotel.Images}`}
               src={hotel.Images}
               alt={hotel.Nom_Hotel}
               onClick={() => navigate(`/hebergements/${hotel.IdHotel}`)} // Redirection vers les détails
             />
-            <h3>{hotel.Nom_Hotel}</h3>
             <p>{hotel.Description}</p>
             <p>
               <strong>Ville:</strong> {hotel.Ville}

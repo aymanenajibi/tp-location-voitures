@@ -1,9 +1,10 @@
 /* Style général de la barre de navigation */
 nav {
-  background-color: #00000022;
-  padding: 10px 0;
-  border-radius: 20px;
-  margin: 5px 18px 18px 18px;
+  background: linear-gradient(135deg, #00b4db, #0083b0); /* Bleu à bleu-vert */
+  padding: 15px 0;
+  border-radius: 15px;
+  margin: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre douce */
 }
 
 /* Liste de liens dans la barre de navigation */
@@ -12,24 +13,54 @@ ul {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center; /* Aligne les éléments à gauche */
+  justify-content: center; /* Centrer les éléments */
+  align-items: center;
 }
 
 /* Style des éléments de la liste */
 li {
-  margin: 0 20px;
+  margin: 0 15px;
+  position: relative;
 }
 
 /* Style des liens */
 a {
-  color: rgb(0, 0, 0);
+  color: #ffffff; /* Texte blanc */
   text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
-  transition: color 0.3s ease;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: inline-block;
 }
 
 /* Effet au survol des liens */
 a:hover {
-  color: #ffffff; /* Couleur orange au survol */
+  background-color: rgba(255, 255, 255, 0.1); /* Fond légèrement blanc au survol */
+  transform: translateY(-2px); /* Légère élévation */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre au survol */
+}
+
+/* Animation pour le soulignement des liens */
+a::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff; /* Ligne blanche */
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+a:hover::after {
+  width: 100%; /* Ligne s'étend au survol */
+}
+
+/* Style pour le lien actif (optionnel) */
+a.active {
+  background-color: rgba(255, 255, 255, 0.2); /* Fond plus clair pour le lien actif */
+  font-weight: bold;
 }

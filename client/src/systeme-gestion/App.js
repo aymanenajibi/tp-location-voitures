@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import ListeVoitures from "./components/ListeVoitures";
 import Hebergements from "./components/Herbergement";
+import DetailsHebergement from "./components/DetailsHebergement";
 import "./style/App.css";
 
 export default function App() {
@@ -12,7 +13,10 @@ export default function App() {
       <div className="app-container">
         <Routes>
           <Route path="/hebergements" element={<Hebergements />} />
-          <Route path="/hebergements/:idHotel" element={<Hebergements />} />
+          <Route
+            path="/hebergements/:idHotel"
+            element={<DetailsHebergement />}
+          />
           <Route path="/voitures" element={<ListeVoitures />} />
           <Route
             path="*"

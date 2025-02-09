@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import "../style/DetailsHebergement.css"; // Importez le fichier CSS
 
 export default function DetailsHebergement({ com }) {
   const { idHotel } = useParams();

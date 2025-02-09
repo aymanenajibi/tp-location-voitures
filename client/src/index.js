@@ -1,11 +1,14 @@
 import React from "react";
-import ReactDOM from "react-dom/client"; // ✅ Import correct pour React 18
-import "bootstrap/dist/css/bootstrap.min.css";
+import ReactDOM from "react-dom/client"; // Import correct pour React 18
+import { Provider } from "react-redux";
+import hotelStore from "./systeme-gestion/redux/HotelStore";
+import "./systeme-gestion/style/App.css";
 import App from "./systeme-gestion/App";
 
-const root = ReactDOM.createRoot(document.getElementById("root")); // ✅ Utilisation de createRoot
+// Création de la root avec createRoot
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={hotelStore}>
+        <App />
+    </Provider>
 );

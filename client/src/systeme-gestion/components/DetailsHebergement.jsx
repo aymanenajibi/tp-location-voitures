@@ -1,0 +1,46 @@
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+export default function DetailsHebergement({ com }) {
+  const { idHotel } = useParams();
+  const hotel = useSelector((state) =>
+    state.db.find((h) => h.IdHotel === idHotel)
+  );
+
+  // Si on est dans la liste des hôtels (via `Hebergements.jsx`), afficher juste les commentaires.
+  if (com) {
+    return (
+      <ul>
+        {com.length > 0 ? (
+          com.map((comment, index) => <li key={index}>{comment}</li>)
+        ) : (
+          <li>Aucun commentaire</li>
+        )}
+      </ul>
+    );
+  }
+
+  // Si on est sur la page de détails et qu'on a un hôtel valide.
+  if (!hotel) {
+    return <h2>Hébergement non trouvé.</h2>;
+  }
+
+  return (
+    <div className="details-container">
+      <h2>{hotel.Nom_Hotel}</h2>
+      <img src={hotel.Images} alt={hotel.Nom_Hotel} />
+      <p><strong>Description :</strong> {hotel.Description}</p>
+      <p><strong>Ville :</strong> {hotel.Ville}</p>
+      <p><strong>Likes :</strong> {hotel.Like}</p>
+      <p><strong>Commentaires :</strong></p>
+      <ul>
+        {hotel.Commentaires.length > 0 ? (
+          hotel.Commentaires.map((comment, index) => <li key={index}>{comment}</li>)
+        ) : (
+          <li>Aucun commentaire</li>
+        )}
+      </ul>
+    </div>
+  );
+}

@@ -81,9 +81,9 @@ export default function ListeVoitures() {
                         ?           //generer les id pour bien structuer les ids 
                         ?           const voituresAvecNouveauxIds = nouvellesVoitures.map((voiture, index) => ({
                         ?               ...voiture , id: `v${index + 1}` // (...) fais un copie a tous les voitures de nouvellesVoiture et
-                                                                                  index = 0 + 1 → v1, index = 1 + 1 → v2, etc.
+                        index = 0 + 1 → v1, index = 1 + 1 → v2, etc.
                         ?           }));
-                                    //voituresAvecNouveauxIds : stocke tous les voitures sans voiture qui nous selectons sans id et reassigner leur id 
+                        //voituresAvecNouveauxIds : stocke tous les voitures sans voiture qui nous selectons sans id et reassigner leur id 
                         *           setVoitures(voituresAvecNouveauxIds);
                         *        }
                         ?    };

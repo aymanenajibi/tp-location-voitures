@@ -6,17 +6,34 @@ import Hebergements from "./components/Herbergement";
 import "./style/App.css";
 
 export default function App() {
-    return (
-        <Router>
-            <NavBar />
-            <div className="app-container">
-                <Routes>
-                    <Route path="/hebergements" element={<Hebergements />} />
-                    <Route path="/hebergements/:idHotel" element={<Hebergements />} />
-                    <Route path="/voitures" element={<ListeVoitures />} />
-                    <Route path="*" element={<h2>Page non trouvée</h2>} />
-                </Routes>
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <NavBar />
+      <div className="app-container">
+        <Routes>
+          <Route path="/hebergements" element={<Hebergements />} />
+          <Route path="/hebergements/:idHotel" element={<Hebergements />} />
+          <Route path="/voitures" element={<ListeVoitures />} />
+          <Route
+            path="*"
+            element={
+              <span>
+                <a
+                  href="http://localhost:3000/hebergements"
+                  style={{
+                    color: "red",
+                    textAlign: "center",
+                    display: "block",
+                    fontSize: "3rem",
+                  }}
+                >
+                  👆 Click 👆
+                </a>
+              </span>
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
+  );
 }

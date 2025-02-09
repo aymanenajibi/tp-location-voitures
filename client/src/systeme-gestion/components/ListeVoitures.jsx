@@ -71,20 +71,20 @@ export default function ListeVoitures() {
                         * 🔥 Supprimer une voiture via API
                     */
                     
-                    /*
+                   /*
                         !    Methode handleDelete sans API :  </>
                         ?   const handleDelete = (id) => {
-                        *       if (window.confirm("Voulez-vous vraiment supprimer cette voiture ? ")) {  
+                        ?       if (window.confirm("Voulez-vous vraiment supprimer cette voiture ? ")) {  
                         *          //nouveaux voitures apres suppression 
                         ?           cosnt nouvellesVoitures = voitures.filter((voiture) => voiture.id !== id);
                         ?           
                         ?           //generer les id pour bien structuer les ids 
                         ?           const voituresAvecNouveauxIds = nouvellesVoitures.map((voiture, index) => ({
                         ?               ...voiture , id: `v${index + 1}` // (...) fais un copie a tous les voitures de nouvellesVoiture et
-                        index = 0 + 1 → v1, index = 1 + 1 → v2, etc.
+                        ?                                                          index = 0 + 1 → v1, index = 1 + 1 → v2, etc.
                         ?           }));
-                        //voituresAvecNouveauxIds : stocke tous les voitures sans voiture qui nous selectons sans id et reassigner leur id 
-                        *           setVoitures(voituresAvecNouveauxIds);
+                        *            voituresAvecNouveauxIds : stocke tous les voitures sans voiture qui nous selectons sans id et reassigner leur id 
+                        ?           setVoitures(voituresAvecNouveauxIds);
                         *        }
                         ?    };
                     */
@@ -137,37 +137,34 @@ export default function ListeVoitures() {
                     */
 
                     /*
-                    ### 📌 **Explication étape par étape du code corrigé**  
-                                  #### 1️⃣ **Déclaration de la fonction**  
-                                  ```js
+                      📌 Explication étape par étape du code corrigé
+                                * 1️⃣ Déclaration de la fonction 
                                   const handleAjoute = (nouvelleVoiture) => {
-                                  ```
+                                  
                                   👉 C'est une fonction qui prend un objet `nouvelleVoiture` en paramètre (une voiture à ajouter).  
                                   
-                                  #### 2️⃣ **Mise à jour de l’état avec `setVoitures`**  
-                                  ```js
+                                * 2️⃣ Mise à jour de l’état avec `setVoitures` 
                                   setVoitures(prevVoitures => {
-                                  ```
+                                  
                                   👉 `prevVoitures` représente l’état actuel (`voitures`) avant la mise à jour.  
                                   👉 On utilise cette fonction pour éviter les problèmes liés à la mise à jour asynchrone de `setVoitures`.  
                                   
-                                  #### 3️⃣ **Génération d’un nouvel ID**  
-                                  ```js
+                                * 3️⃣ Génération d’un nouvel ID  
                                   const nouvelId = `v${prevVoitures.length + 1}`;
-                                  ```
+                                  
                                   👉 On compte le nombre de voitures actuelles (`prevVoitures.length`) et on ajoute 1 pour créer un nouvel ID unique.  
                                   
-                                  #### 4️⃣ **Ajout de la nouvelle voiture avec son ID**  
-                                  ```js
+                                * 4️⃣ Ajout de la nouvelle voiture avec son ID  
+                                
                                   return [...prevVoitures, { ...nouvelleVoiture, id: nouvelId }];
-                                  ```
+                                  
                                   👉 On crée une nouvelle liste contenant :  
                                   ✅ Les anciennes voitures (`prevVoitures`).  
                                   ✅ La nouvelle voiture (`nouvelleVoiture`), à laquelle on ajoute l’ID (`id: nouvelId`).  
                                   
                                   ---
                                   
-                                  ### 🎯 **Résultat final**  
+                                  🎯 Résultat final  
                                   🔹 Chaque nouvelle voiture ajoutée a un ID unique.  
                                   🔹 L’état (`voitures`) est toujours bien mis à jour sans erreur. 🚀
                     */

@@ -13,12 +13,6 @@ export const addLike = (idHotel) => ({
 });
 
 
-
-
-
-
-
-
 export const deleteComment = (hotelId, commentIndex) => {
     return {
     type: DELETE_COMMENT,

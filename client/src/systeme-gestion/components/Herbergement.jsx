@@ -8,7 +8,7 @@ import {
   editComment,
 } from "../redux/action";
 import "../style/Hebergements.css"; // Importation des styles
-import DetailsHebergement from "./DetailsHebergement"; // Importation du composant DetailsHebergement
+
 
 export default function Hebergements() {
   const hotels = useSelector((state) => state.db); //* Récupère les hôtels depuis le Redux store
@@ -56,7 +56,7 @@ export default function Hebergements() {
               // src={`/images/${hotel.Images}`}
               src={hotel.Images}
               alt={hotel.Nom_Hotel}
-              onClick={() => navigate(`/hebergements/${hotel.IdHotel}`)} // Redirection vers les détails
+              onClick={() => navigate(`/detailshebergements/${hotel.IdHotel}`)} //* Redirection vers les détails
             />
 
             <p>{hotel.Description}</p>

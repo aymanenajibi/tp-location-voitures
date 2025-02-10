@@ -3,24 +3,11 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "../style/DetailsHebergement.css"; // Importez le fichier CSS
 
-export default function DetailsHebergement({ com }) {
+export default function DetailsHebergement() {
   const { idHotel } = useParams();
   const hotel = useSelector((state) =>
     state.db.find((h) => h.IdHotel === idHotel)
   );
-
-  // Si on est dans la liste des hôtels (via `Hebergements.jsx`), afficher juste les commentaires.
-  if (com) {
-    return (
-      <ul>
-        {com.length > 0 ? (
-          com.map((comment, index) => <li key={index}>{comment}</li>)
-        ) : (
-          <li>Aucun commentaire</li>
-        )}
-      </ul>
-    );
-  }
 
   // Si on est sur la page de détails et qu'on a un hôtel valide.
   if (!hotel) {

@@ -15,7 +15,7 @@ export default function App() {
         <Routes>
           <Route path="/hebergements" element={<Hebergements />} />
           <Route
-            path="/hebergements/:idHotel"
+            path="/detailshebergements/:idHotel"
             element={<DetailsHebergement />}
           />
           <Route path="/voitures" element={<ListeVoitures />} />

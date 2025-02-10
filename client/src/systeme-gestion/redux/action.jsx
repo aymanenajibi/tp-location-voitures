@@ -1,6 +1,7 @@
 export const ADD_COMMENT = "ADD_COMMENT";
 export const ADD_LIKE = "ADD_LIKE";
 export const DELETE_COMMENT = "DELETE_COMMENT";
+export const EDIT_COMMENT = "EDIT_COMMENT";
 
 export const addComment = (idHotel, comment) => ({
     type: ADD_COMMENT,
@@ -19,3 +20,15 @@ export const deleteComment = (hotelId, commentIndex) => {
     payload: { hotelId, commentIndex },
     };
 };
+
+
+
+
+export const editComment = (hotelId, commentIndex, newComment) => {
+    return {
+      type: "EDIT_COMMENT",
+      payload: { hotelId, commentIndex, newComment },
+    };
+  };
+
+

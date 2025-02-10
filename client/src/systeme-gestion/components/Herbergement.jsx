@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addComment, addLike, deleteComment } from "../redux/action";
+import { addComment, addLike, deleteComment ,editComment  } from "../redux/action";
 import "../style/Hebergements.css"; // Importation des styles
 import DetailsHebergement from "./DetailsHebergement";  // Importation du composant DetailsHebergement
 
@@ -13,6 +13,13 @@ export default function Hebergements() {
   const [search, setSearch] = useState("");             //* État pour la recherche par ville
   const [showForm, setShowForm] = useState(null);       //* Gère l'affichage du formulaire
   const [comment, setComment] = useState("");           //* État pour le commentaire
+
+
+
+
+
+const [editIndex, setEditIndex] = useState(null); //  
+const [editText, setEditText] = useState(""); //
 
 
 
@@ -84,27 +91,45 @@ export default function Hebergements() {
                 </button>
 
                 
-                {/* Affichage des commentaires avec le bouton supprimer */}
-                <ul>
-                  {hotel.Commentaires.map((comment, index) => (
-                    <li key={index}>
-                      {comment}
-                      <br />
-                      <button
-                        onClick={() =>
-                          dispatch(deleteComment(hotel.IdHotel, index))
-                        }
-                        style={{
-                          backgroundColor: "red",
-                          width: "100px",
-                          fontSize: "15px",
-                        }}
-                      >
-                        supprimer
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                {/* Affichage des commentaires avec les boutons supprimer et modifier */}
+<ul>
+  {hotel.Commentaires.map((comment, index) => (
+    <li key={index}>
+      {editIndex === index ? (
+        <>
+          <input
+            type="text"
+            value={editText}
+            onChange={(e) => setEditText(e.target.value)}
+          />
+          <button
+            onClick={() => {
+              dispatch(editComment(hotel.IdHotel, index, editText));
+              setEditIndex(null); // Réinitialiser après modification
+            }} style={{ backgroundColor: "bleu", width: "100px", fontSize: "13px" }}>✅Enregistre</button>
+          <button onClick={() => setEditIndex(null)} style={{ backgroundColor: "bleu", width: "100px", fontSize: "13px" }}>❌Annuler</button>
+        </>
+      ) : (
+        <>
+          {comment}
+          <br />
+          <button
+            onClick={() =>
+              dispatch(deleteComment(hotel.IdHotel, index))
+            }
+            style={{ backgroundColor: "red", width: "100px", fontSize: "15px" }}
+          >
+            supprimer
+          </button>
+          <button onClick={() => { setEditIndex(index); setEditText(comment); }} style={{ backgroundColor: "bleu", width: "100px", fontSize: "15px" }}>
+          Modifier
+          </button>
+        </>
+      )}
+    </li>
+  ))}
+</ul>
+
               </div>
             )}
 
@@ -112,6 +137,11 @@ export default function Hebergements() {
             {/*<ul>
               <DetailsHebergement com={hotel.Commentaires} />
             </ul>*/}
+
+
+
+
+
           </div>
         ))
       ) : (

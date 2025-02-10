@@ -128,9 +128,57 @@
   margin-top: 20px;
 }
 
+/* Conteneur principal pour les cartes */
+.hebergements-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Conteneur pour la barre de recherche et le bouton */
+.search-container {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Barre de recherche */
+.search-bar {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Bouton Ajouter un hébergement */
+.add-hotel-btn {
+  background-color: #00b894;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  height: 40px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.add-hotel-btn:hover {
+  background-color: #00997b;
+}
+
 @media (max-width: 1024px) {
   .hebergements-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 cartes par ligne sur les écrans moyens */
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* 2 cartes par ligne sur les écrans moyens */
   }
 }
 
@@ -168,3 +216,15 @@
     font-size: 12px; /* Taille de police réduite */
   }
 }
+
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+  }
+
+  .add-hotel-btn {
+    width: 100%;
+    padding: 12px;
+  }
+}
+

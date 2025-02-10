@@ -50,12 +50,13 @@ form .form-group select {
 
 form button {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background-color: #28a745;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  height: 38px;
   font-size: 18px;
   transition: background-color 0.3s ease-in-out;
 }
@@ -127,3 +128,4 @@ select {
   border: 1px solid #ddd;
   font-size: 14px;
 }
+

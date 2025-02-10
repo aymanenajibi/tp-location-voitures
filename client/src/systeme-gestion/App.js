@@ -5,6 +5,7 @@ import ListeVoitures from "./components/ListeVoitures";
 import Hebergements from "./components/Herbergement";
 import DetailsHebergement from "./components/DetailsHebergement";
 import "./style/App.css";
+import AjouterHebergements from "./components/AjouterHebergement";
 
 export default function App() {
   return (
@@ -35,6 +36,10 @@ export default function App() {
                 </a>
               </span>
             }
+          />
+          <Route
+            path="/hebergements/AjouterHebergements"
+            element={<AjouterHebergements />}
           />
         </Routes>
       </div>

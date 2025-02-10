@@ -1,4 +1,4 @@
-import { ADD_COMMENT, ADD_LIKE ,DELETE_COMMENT, EDIT_COMMENT} from "./action";
+import { ADD_COMMENT, ADD_HOTEL, ADD_LIKE, DELETE_COMMENT, EDIT_COMMENT } from "./action";
 import { initialState } from "./HotelStore";
 
 export default function hotelReducer(state = initialState, action) {
@@ -25,31 +25,20 @@ export default function hotelReducer(state = initialState, action) {
         ),
       };
 
-
-
-
-
-
-
-      case DELETE_COMMENT:
+    case DELETE_COMMENT:
       return {
         ...state,
         db: state.db.map((hotel) =>
           hotel.IdHotel === action.payload.hotelId
             ? {
                 ...hotel,
-                Commentaires: hotel.Commentaires.filter((_, index) => index !== action.payload.commentIndex),
+                Commentaires: hotel.Commentaires.filter(
+                  (_, index) => index !== action.payload.commentIndex
+                ),
               }
             : hotel
         ),
       };
-
-
-
-
-
-
-
 
     case EDIT_COMMENT:
       return {
@@ -59,16 +48,20 @@ export default function hotelReducer(state = initialState, action) {
             ? {
                 ...hotel,
                 Commentaires: hotel.Commentaires.map((comment, index) =>
-                  index === action.payload.commentIndex ? action.payload.newComment : comment
+                  index === action.payload.commentIndex
+                    ? action.payload.newComment
+                    : comment
                 ),
               }
             : hotel
         ),
       };
 
-
-
-
+    case ADD_HOTEL:
+      return {
+        ...state,
+        db: [...state.db, action.payload], //* Ajoute le nouvel hôtel
+      };
 
     default:
       return state;

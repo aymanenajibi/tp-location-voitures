@@ -1,27 +1,26 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addComment, addLike, deleteComment ,editComment  } from "../redux/action";
+import {
+  addComment,
+  addLike,
+  deleteComment,
+  editComment,
+} from "../redux/action";
 import "../style/Hebergements.css"; // Importation des styles
-import DetailsHebergement from "./DetailsHebergement";  // Importation du composant DetailsHebergement
+import DetailsHebergement from "./DetailsHebergement"; // Importation du composant DetailsHebergement
 
 export default function Hebergements() {
-  const hotels = useSelector((state) => state.db);      //* Récupère les hôtels depuis le Redux store
+  const hotels = useSelector((state) => state.db); //* Récupère les hôtels depuis le Redux store
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [search, setSearch] = useState("");             //* État pour la recherche par ville
-  const [showForm, setShowForm] = useState(null);       //* Gère l'affichage du formulaire
-  const [comment, setComment] = useState("");           //* État pour le commentaire
+  const [search, setSearch] = useState(""); //* État pour la recherche par ville
+  const [showForm, setShowForm] = useState(null); //* Gère l'affichage du formulaire
+  const [comment, setComment] = useState(""); //* État pour le commentaire
 
-
-
-
-
-const [editIndex, setEditIndex] = useState(null); //  
-const [editText, setEditText] = useState(""); //
-
-
+  const [editIndex, setEditIndex] = useState(null); //
+  const [editText, setEditText] = useState(""); //
 
   //* Filtrage des hôtels par ville
   const filteredHotels = hotels.filter((hotel) =>
@@ -30,14 +29,23 @@ const [editText, setEditText] = useState(""); //
 
   return (
     <div className="hebergements-container">
-      {/* Barre de recherche */}
-      <input
-        type="text"
-        placeholder="Rechercher par ville..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="search-bar"
-      />
+      {/* Conteneur pour la recherche et le bouton */}
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Rechercher par ville..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="search-bar"
+        />
+
+        <button
+          onClick={() => navigate("/hebergements/AjouterHebergements")}
+          className="add-hotel-btn"
+        >
+          ➕ Ajouter un hôtel
+        </button>
+      </div>
 
       {/* Affichage des hébergements */}
       {filteredHotels.length > 0 ? (
@@ -51,7 +59,6 @@ const [editText, setEditText] = useState(""); //
               onClick={() => navigate(`/hebergements/${hotel.IdHotel}`)} // Redirection vers les détails
             />
 
-            
             <p>{hotel.Description}</p>
             <p>
               <strong>Ville:</strong> {hotel.Ville}
@@ -60,7 +67,6 @@ const [editText, setEditText] = useState(""); //
               <strong>Likes:</strong> {hotel.Like}
             </p>
 
-            
             {/* Bouton Like */}
             <button onClick={() => dispatch(addLike(hotel.IdHotel))}>
               👍 Like
@@ -71,7 +77,6 @@ const [editText, setEditText] = useState(""); //
               💬 +AjouterComment
             </button>
 
-            
             {/* Formulaire d'ajout de commentaire */}
             {showForm === hotel.IdHotel && (
               <div className="comment-form">
@@ -90,46 +95,77 @@ const [editText, setEditText] = useState(""); //
                   + Ajouter
                 </button>
 
-                
                 {/* Affichage des commentaires avec les boutons supprimer et modifier */}
-<ul>
-  {hotel.Commentaires.map((comment, index) => (
-    <li key={index}>
-      {editIndex === index ? (
-        <>
-          <input
-            type="text"
-            value={editText}
-            onChange={(e) => setEditText(e.target.value)}
-          />
-          <button
-            onClick={() => {
-              dispatch(editComment(hotel.IdHotel, index, editText));
-              setEditIndex(null); // Réinitialiser après modification
-            }} style={{ backgroundColor: "bleu", width: "100px", fontSize: "13px" }}>✅Enregistre</button>
-          <button onClick={() => setEditIndex(null)} style={{ backgroundColor: "bleu", width: "100px", fontSize: "13px" }}>❌Annuler</button>
-        </>
-      ) : (
-        <>
-          {comment}
-          <br />
-          <button
-            onClick={() =>
-              dispatch(deleteComment(hotel.IdHotel, index))
-            }
-            style={{ backgroundColor: "red", width: "100px", fontSize: "15px" }}
-          >
-            supprimer
-          </button>
-          <button onClick={() => { setEditIndex(index); setEditText(comment); }} style={{ backgroundColor: "bleu", width: "100px", fontSize: "15px" }}>
-          Modifier
-          </button>
-        </>
-      )}
-    </li>
-  ))}
-</ul>
-
+                <ul>
+                  {hotel.Commentaires.map((comment, index) => (
+                    <li key={index}>
+                      {editIndex === index ? (
+                        <>
+                          <input
+                            type="text"
+                            value={editText}
+                            onChange={(e) => setEditText(e.target.value)}
+                          />
+                          <button
+                            onClick={() => {
+                              dispatch(
+                                editComment(hotel.IdHotel, index, editText)
+                              );
+                              setEditIndex(null); // Réinitialiser après modification
+                            }}
+                            style={{
+                              backgroundColor: "bleu",
+                              width: "100px",
+                              fontSize: "13px",
+                            }}
+                          >
+                            ✅Enregistre
+                          </button>
+                          <button
+                            onClick={() => setEditIndex(null)}
+                            style={{
+                              backgroundColor: "bleu",
+                              width: "100px",
+                              fontSize: "13px",
+                            }}
+                          >
+                            ❌Annuler
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          {comment}
+                          <br />
+                          <button
+                            onClick={() =>
+                              dispatch(deleteComment(hotel.IdHotel, index))
+                            }
+                            style={{
+                              backgroundColor: "red",
+                              width: "100px",
+                              fontSize: "15px",
+                            }}
+                          >
+                            supprimer
+                          </button>
+                          <button
+                            onClick={() => {
+                              setEditIndex(index);
+                              setEditText(comment);
+                            }}
+                            style={{
+                              backgroundColor: "bleu",
+                              width: "100px",
+                              fontSize: "15px",
+                            }}
+                          >
+                            Modifier
+                          </button>
+                        </>
+                      )}
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
 
@@ -137,11 +173,6 @@ const [editText, setEditText] = useState(""); //
             {/*<ul>
               <DetailsHebergement com={hotel.Commentaires} />
             </ul>*/}
-
-
-
-
-
           </div>
         ))
       ) : (

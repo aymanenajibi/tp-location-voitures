@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addComment, addLike , deleteComment } from "../redux/action";
+import { addComment, addLike, deleteComment } from "../redux/action";
 import "../style/Hebergements.css"; // Importation des styles
-import DetailsHebergement from "./DetailsHebergement"; // Importation du composant DetailsHebergement
+import DetailsHebergement from "./DetailsHebergement";  // Importation du composant DetailsHebergement
 
 export default function Hebergements() {
-  const hotels = useSelector((state) => state.db); // Récupère les hôtels depuis le Redux store
+  const hotels = useSelector((state) => state.db);      //* Récupère les hôtels depuis le Redux store
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [search, setSearch] = useState(""); // État pour la recherche par ville
-  const [showForm, setShowForm] = useState(null); // Gère l'affichage du formulaire
-  const [comment, setComment] = useState(""); // État pour le commentaire
+  const [search, setSearch] = useState("");             //* État pour la recherche par ville
+  const [showForm, setShowForm] = useState(null);       //* Gère l'affichage du formulaire
+  const [comment, setComment] = useState("");           //* État pour le commentaire
 
-  // Filtrage des hôtels par ville
+
+
+  //* Filtrage des hôtels par ville
   const filteredHotels = hotels.filter((hotel) =>
     hotel.Ville.toLowerCase().includes(search.toLowerCase())
   );
@@ -34,13 +36,15 @@ export default function Hebergements() {
       {filteredHotels.length > 0 ? (
         filteredHotels.map((hotel) => (
           <div key={hotel.IdHotel} className="hebergement-card">
-          <h3>{hotel.Nom_Hotel}</h3>
+            <h3>{hotel.Nom_Hotel}</h3>
             <img
               // src={`/images/${hotel.Images}`}
               src={hotel.Images}
               alt={hotel.Nom_Hotel}
               onClick={() => navigate(`/hebergements/${hotel.IdHotel}`)} // Redirection vers les détails
             />
+
+            
             <p>{hotel.Description}</p>
             <p>
               <strong>Ville:</strong> {hotel.Ville}
@@ -49,14 +53,18 @@ export default function Hebergements() {
               <strong>Likes:</strong> {hotel.Like}
             </p>
 
+            
             {/* Bouton Like */}
             <button onClick={() => dispatch(addLike(hotel.IdHotel))}>
               👍 Like
             </button>
 
             {/* Bouton pour afficher le formulaire d'ajout de commentaire */}
-            <button onClick={() => setShowForm(hotel.IdHotel)}>💬 +AjouterComment</button>
+            <button onClick={() => setShowForm(hotel.IdHotel)}>
+              💬 +AjouterComment
+            </button>
 
+            
             {/* Formulaire d'ajout de commentaire */}
             {showForm === hotel.IdHotel && (
               <div className="comment-form">
@@ -72,28 +80,35 @@ export default function Hebergements() {
                     setComment(""); // Réinitialiser le champ après ajout
                   }}
                 >
-                  ➕ Ajouter
+                  + Ajouter
                 </button>
+
                 
-
-
-
-
-
                 {/* Affichage des commentaires avec le bouton supprimer */}
-              <ul>
+                <ul>
                   {hotel.Commentaires.map((comment, index) => (
-                  <li key={index}>
-                  {comment}
-                <button onClick={() => dispatch(deleteComment(hotel.IdHotel, index))} style={{color:"red"}}>Supprimer</button>
-              </li>
-            ))}
-            </ul>
+                    <li key={index}>
+                      {comment}
+                      <br />
+                      <button
+                        onClick={() =>
+                          dispatch(deleteComment(hotel.IdHotel, index))
+                        }
+                        style={{
+                          backgroundColor: "red",
+                          width: "100px",
+                          fontSize: "15px",
+                        }}
+                      >
+                        supprimer
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
 
             {/* Affichage des détails de l'hébergement */}
-
             {/*<ul>
               <DetailsHebergement com={hotel.Commentaires} />
             </ul>*/}

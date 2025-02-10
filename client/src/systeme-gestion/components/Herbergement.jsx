@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addComment, addLike } from "../redux/action";
+import { addComment, addLike , deleteComment } from "../redux/action";
 import "../style/Hebergements.css"; // Importation des styles
 import DetailsHebergement from "./DetailsHebergement"; // Importation du composant DetailsHebergement
 
@@ -74,14 +74,29 @@ export default function Hebergements() {
                 >
                   ➕ Ajouter
                 </button>
+                
+
+
+
+
+
+                {/* Affichage des commentaires avec le bouton supprimer */}
+              <ul>
+                  {hotel.Commentaires.map((comment, index) => (
+                  <li key={index}>
+                  {comment}
+                <button onClick={() => dispatch(deleteComment(hotel.IdHotel, index))} style={{color:"red"}}>Supprimer</button>
+              </li>
+            ))}
+            </ul>
               </div>
             )}
 
             {/* Affichage des détails de l'hébergement */}
 
-            <ul>
+            {/*<ul>
               <DetailsHebergement com={hotel.Commentaires} />
-            </ul>
+            </ul>*/}
           </div>
         ))
       ) : (

@@ -1,4 +1,4 @@
-import { ADD_COMMENT, ADD_LIKE } from "./action";
+import { ADD_COMMENT, ADD_LIKE ,DELETE_COMMENT} from "./action";
 import { initialState } from "./HotelStore";
 
 export default function hotelReducer(state = initialState, action) {
@@ -24,6 +24,26 @@ export default function hotelReducer(state = initialState, action) {
             : hotel
         ),
       };
+
+
+
+
+
+
+
+      case DELETE_COMMENT:
+      return {
+        ...state,
+        db: state.db.map((hotel) =>
+          hotel.IdHotel === action.payload.hotelId
+            ? {
+                ...hotel,
+                Commentaires: hotel.Commentaires.filter((_, index) => index !== action.payload.commentIndex),
+              }
+            : hotel
+        ),
+      };
+
     default:
       return state;
   }

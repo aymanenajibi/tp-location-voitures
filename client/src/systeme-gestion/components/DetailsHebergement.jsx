@@ -18,13 +18,26 @@ export default function DetailsHebergement() {
     <div className="details-container">
       <h2>{hotel.Nom_Hotel}</h2>
       <img src={hotel.Images} alt={hotel.Nom_Hotel} />
-      <p><strong>Description :</strong> {hotel.Description}</p>
-      <p><strong>Ville :</strong> {hotel.Ville}</p>
-      <p><strong>Likes :</strong> {hotel.Like}</p>
-      <p><strong>Commentaires :</strong></p>
+      <p>
+        <strong>Description :</strong>
+        {hotel.Description}
+      </p>
+      <p>
+        <strong>Ville :</strong>
+        {hotel.Ville}
+      </p>
+      <p>
+        <strong>Likes :</strong>
+        {hotel.Like}
+      </p>
+      <p>
+        <strong>Commentaires :</strong>
+      </p>
       <ul>
         {hotel.Commentaires.length > 0 ? (
-          hotel.Commentaires.map((comment, index) => <li key={index}>{comment}</li>)
+          hotel.Commentaires.map((comment, index) => (
+            <li key={index}>{comment}</li>
+          ))
         ) : (
           <li>Aucun commentaire</li>
         )}
